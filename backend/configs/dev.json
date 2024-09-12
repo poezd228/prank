@@ -1,0 +1,17 @@
+{
+  "server": {
+    "port": 1337
+  },
+  "handler": {
+    "request_timeout" : 10000000,
+    "swagger_host" : "",
+    "queue_size" : 10000
+
+  },
+  "auth": {
+    "key":                 "secret",
+    "access_token_timeout":  10000000000000,
+    "refresh_token_timeout": 10000000000000,
+    "auth_timeout":         10000000000000
+  }
+}
