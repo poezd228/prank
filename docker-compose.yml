@@ -1,0 +1,34 @@
+
+version: "3.8"
+services:
+  psoic-postgres:
+    image: postgres:15
+    volumes:
+      - psoic-postgres-data:/var/lib/postgresql/data
+
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+  psoic-service:
+    image: psoic:latest
+
+    volumes:
+      - ./.env:/.env
+      - ./logs:/logs
+    ports:
+      - "1337:1337"
+    restart: unless-stopped
+  psoic-postgres-migration:
+    build:
+      context: .
+      dockerfile: migrate.Dockerfile
+    env_file:
+      - ./.env
+    depends_on:
+      - psoic-postgres
+
+
+volumes:
+  psoic-postgres-data:
